@@ -1,165 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <title>Agendamento Confirmado</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmação</title>
 
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;
-    n.push=n;
-    n.loaded=!0;
-    n.version='2.0';
-    n.queue=[];
-    t=b.createElement(e);
-    t.async=!0;
-    t.src=v;
-    s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}
-    (window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){
+n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;
+n.push=n;
+n.loaded=!0;
+n.version='2.0';
+n.queue=[];
+t=b.createElement(e);
+t.async=!0;
+t.src=v;
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}
+(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '1457219945879978');
-    fbq('track', 'PageView');
-  </script>
+fbq('init', '1457219945879978');
+fbq('track', 'PageView');
+fbq('track', 'Purchase');
+</script>
 
-  <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1457219945879978&ev=PageView&noscript=1"/>
-  </noscript>
-  <!-- End Meta Pixel Code -->
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1457219945879978&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel -->
 
-  <!-- Disparo único do Purchase -->
-  <script>
-    (function () {
+<style>
 
-      var TTL_DIAS = 365;
+body{
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
 
-      function getParam(name){
-        var m = new RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-        return m ? decodeURIComponent(m[1].replace(/\+/g,' ')) : null;
-      }
+.box{
+background:#fff;
+padding:40px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+max-width:500px;
+width:90%;
+}
 
-      function setCookie(name, value, days){
-        var d = new Date();
-        d.setTime(d.getTime() + (days*24*60*60*1000));
-        document.cookie =
-          name + "=" + encodeURIComponent(value) +
-          "; expires=" + d.toUTCString() +
-          "; path=/; SameSite=Lax";
-      }
+.check{
+font-size:70px;
+color:#00b300;
+margin-bottom:10px;
+}
 
-      function getCookie(name){
-        var match = document.cookie.match(
-          new RegExp('(^| )' + name + '=([^;]+)')
-        );
-        return match ? decodeURIComponent(match[2]) : null;
-      }
+h1{
+color:#00a000;
+margin-bottom:15px;
+}
 
-      var aid = getParam('aid');
+p{
+color:#555;
+font-size:18px;
+line-height:1.5;
+}
 
-      var keyBase = 'purchase_confirmado';
-      var key = aid ? (keyBase + '_' + aid) : keyBase;
+</style>
 
-      var alreadySession = (sessionStorage.getItem(key) === '1');
-      var alreadyLocal   = (localStorage.getItem(key)  === '1');
-      var alreadyCookie  = (getCookie(key)             === '1');
-
-      if (alreadySession || alreadyLocal || alreadyCookie) {
-        return;
-      }
-
-      if (typeof fbq === 'function') {
-
-        fbq('track', 'Purchase', {
-          currency: 'BRL',
-          value: 1.00
-        });
-
-        sessionStorage.setItem(key, '1');
-        localStorage.setItem(key, '1');
-        setCookie(key, '1', TTL_DIAS);
-      }
-
-    })();
-  </script>
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Calibri, 'Segoe UI', sans-serif;
-      background: #f4f4f4;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .container {
-      background: #fff;
-      padding: 40px 20px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.1);
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 34px;
-      font-weight: bold;
-      color: #2ecc71;
-      margin-bottom: 22px;
-    }
-
-    .icon {
-      font-size: 88px;
-      margin-bottom: 22px;
-      display: flex;
-      justify-content: center;
-    }
-
-    p.sub {
-      font-size: 20px;
-      font-weight: 300;
-      color: #333;
-    }
-
-    @media (max-width: 480px) {
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .icon {
-        font-size: 72px;
-      }
-
-      p.sub {
-        font-size: 18px;
-      }
-
-    }
-  </style>
 </head>
 
 <body>
 
-  <div class="container">
-    <h1>Parabéns! Seu agendamento foi confirmado</h1>
+<div class="box">
 
-    <div class="icon">✅</div>
+<div class="check">✔️</div>
 
-    <p class="sub">
-      Agora vamos preparar o seu produto para envio,
-      e em breve você receberá em sua casa.
-    </p>
-  </div>
+<h1>Parabéns! Seu pedido foi confirmado</h1>
+
+<p>
+Agora vamos preparar o seu produto e em breve ele chegará até você.
+</p>
+
+</div>
 
 </body>
 </html>
+   
