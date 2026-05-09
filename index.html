@@ -25,7 +25,21 @@ s.parentNode.insertBefore(t,s)}
 
 fbq('init', '1457219945879978');
 fbq('track', 'PageView');
-fbq('track', 'Purchase');
+
+window.onload = function() {
+
+if (!sessionStorage.getItem('evento_disparado')) {
+
+fbq('trackCustom', 'AgendamentoConcluido', {
+value: 47.90,
+currency: 'BRL'
+});
+
+sessionStorage.setItem('evento_disparado', 'true');
+
+}
+
+}
 </script>
 
 <noscript>
@@ -94,4 +108,3 @@ Agora vamos preparar o seu produto e em breve ele chegará até você.
 
 </body>
 </html>
-   
